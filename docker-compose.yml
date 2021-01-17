@@ -2,7 +2,6 @@ version: "3"
 
 services:
   influxdb:
-    // https://hub.docker.com/_/influxdb
     image: influxdb:1.8.3
     container_name: influxdb
     volumes:
@@ -11,7 +10,6 @@ services:
       - 8086:8086
 
   grafana:
-    // https://hub.docker.com/r/grafana/grafana
     image: grafana/grafana:7.3.7
     ports:
       - 8085:3000
