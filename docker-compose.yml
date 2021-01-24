@@ -5,18 +5,55 @@ services:
     image: influxdb:1.8.3
     container_name: influxdb
     volumes:
-      - ./data/influxdb:/var/lib/influxdb
+      # - ./data/influxdb:/var/lib/influxdb
+      - ./influxdb/data:/var/lib/influxdb
     ports:
       - 8086:8086
 
+  # https://grafana.com/docs/grafana/latest/administration/configure-docker/
   grafana:
     image: grafana/grafana:7.3.7
+    container_name: grafana
     ports:
-      - 8085:3000
+      - 3000:3000
+    user: "472"
     volumes:
-      - ./data/grafana:/var/lib/grafana
+      - ./grafana/data:/var/lib/grafana
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     depends_on:
       - influxdb
     environment:
       - GF_SERVER_ROOT_URL=http://192.168.77.6:8085
       - GF_SECURITY_ADMIN_PASSWORD=admin
+
+  telegraf:
+    image: telegraf:1.17.0
+    container_name: telegraf
+    restart: always
+    depends_on:
+      - influxdb
+    network_mode: "host"
+    ports:
+        - 8125:8125 # StatD
+        - 8092:8092 # UDP
+        - 8094:8094 #TCP
+    environment:
+      HOST_PROC: /rootfs/proc
+      HOST_SYS: /rootfs/sys
+      HOST_ETC: /rootfs/etc
+    volumes:
+    #  - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+     - /var/run/docker.sock:/var/run/docker.sock:ro
+     - /sys:/rootfs/sys:ro
+     - /proc:/rootfs/proc:ro
+     - /etc:/rootfs/etc:ro
+  nginx:
+    image: nginx:1.19.6
+    container_name: nginx
+    restart: always
+    network_mode: "host"
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - "./nginx/conf.d:/etc/nginx/conf.d"
