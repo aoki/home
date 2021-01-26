@@ -49,6 +49,7 @@ services:
      - /sys:/rootfs/sys:ro
      - /proc:/rootfs/proc:ro
      - /etc:/rootfs/etc:ro
+
   nginx:
     image: nginx:1.19.6
     container_name: nginx

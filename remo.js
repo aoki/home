@@ -23,7 +23,7 @@ const getRemoData = async () => {
   try {
     const response = await got('https://api.nature.global/1/appliances', {
       responseType: 'json',
-      headers : {"Authorization" : `Bearer ${process.env.NATURE_REMO_CLOUD_API_TOKEN}`}
+      headers: { "Authorization": `Bearer ${process.env.NATURE_REMO_CLOUD_API_TOKEN}` }
     });
     data.statusCode = response.statusCode
     data.statusMessage = response.statusMessage
@@ -34,7 +34,7 @@ const getRemoData = async () => {
     data.energyRawData = response.body[0].smart_meter.echonetlite_properties.reduce((acc, e) => {
       acc[e.epc] = e
       return acc
-      },{})
+    }, {})
     data.energy = {
       instantaneous: data.energyRawData["231"].val,
       kwh: data.energyRawData["224"].val * data.energyRawData["211"].val / (10 * data.energyRawData["225"].val)
@@ -58,7 +58,7 @@ const getRemoData = async () => {
     // epc	name	プロパティ名称
     // 0xE0(224)	normal_direction_cumulative_electric_energy	積算電力量計測値(正方向)
     // 0xE3(227)	reverse_direction_cumulative_electric_energy	積算電力量計測値(逆方向)
-        // 正方向が買電、逆方向が売電に対応
+    // 正方向が買電、逆方向が売電に対応
     // 0xD3(211)	coefficient	係数
     // 0xE1(225)	cumulative_electric_energy_unit	積算電力量単位
     // 0xD7(215)	cumulative_electric_energy_effective_digits	積算電力量有効桁数

@@ -3,7 +3,7 @@ const Readline = require('@serialport/parser-readline')
 const Influx = require('influx')
 const ltsv = require('ltsv')
 
-const port = new SerialPort('/dev/cu.usbmodem143101')
+const port = new SerialPort('/dev/serial0')
 const host = 'living.arduino.aoki.dev'
 const MEASUREMENT = 'arduino_sensors'
 
@@ -26,8 +26,6 @@ try {
 } catch (error) {
   console.log(error);
 }
-
-
 
 const influx = new Influx.InfluxDB({
   host: 'localhost',
