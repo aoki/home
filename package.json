@@ -18,6 +18,7 @@
     "nature-remo": "^1.2.3",
     "pm2": "^4.5.1",
     "raspi": "^6.0.1",
+    "raspi-gpio": "^6.2.2",
     "raspi-i2c": "^6.2.4",
     "serialport": "^9.0.4"
   }

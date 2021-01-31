@@ -1,6 +1,9 @@
 const bme280 = require('bme280');
 const Influx = require('influx')
 
+const raspi = require('raspi');
+const gpio = require('raspi-gpio');
+
 const host = 'living.raspberry.aoki.dev'
 const MEASUREMENT = 'sensors'
 
