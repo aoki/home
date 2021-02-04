@@ -1,26 +1,25 @@
 const raspi = require('raspi');
 const gpio = require('raspi-gpio');
+const { HIGH, LOW, DigitalInput, DigitalOutput } = require('raspi-gpio');
 
-const HIGH = gpio.HIGH;
-const LOW = gpio.LOW;
-const Input = gpio.DigitalInput;
-const Output = gpio.DigitalOutput;
+const initHandler = () => {
 
-const initHandler = function () {
+    const d_in = new DigitalOutput('GPIO10'); //SPI MOSI: Master Out Slave In
+    const d_out = new DigitalInput('GPIO9'); //SPI MISO: Master In Slave Out
+    const clk = new DigitalOutput('GPIO11'); //SPI CLK: Serial Clock
+    const cs = new DigitalOutput({
+        pin: 'GPIO8',
+        pullResistor: gpio.PULL_UP
+    });  // SPI_CE0_N
 
-    const d_in = new Output('GPIO10'); //SPI_MOSI
-    const d_out = new Input('GPIO9');   //SPI_MISO
-    const clk = new Output('GPIO11'); //SPI_CSLK
-    const cs = new Output({ 'pin': 'GPIO8', 'pullResistor': gpio.PULL_UP });  //SPI_CE0
-
-    const clock = function (count) {
+    const clock = (count) => {
         for (var i = 0; i < count; i++) {
             clk.write(HIGH);
             clk.write(LOW);
         }
     };
 
-    const readValue = function () {
+    const readValue = () => {
         cs.write(LOW); //start
 
         const ch = 0; // 0 ch. (0~7)
@@ -47,7 +46,12 @@ const initHandler = function () {
     };
 
     setInterval(readValue, 1000);
-
 };
+
+
+process.on('SIGINT', () => {
+    console.log('SIG')
+    cs.write(HIGH);
+});
 
 raspi.init(initHandler);
