@@ -1,8 +1,6 @@
 const bme280 = require('bme280');
-const Influx = require('influx')
-
-const raspi = require('raspi');
-const gpio = require('raspi-gpio');
+const Influx = require('influx');
+const cds = require('./cds');
 
 const host = 'living.raspberry.aoki.dev'
 const MEASUREMENT = 'sensors'
@@ -25,6 +23,7 @@ const influx = new Influx.InfluxDB({
 const getSensorData = async () => {
   const sensor = await bme280.open({ i2cAddress: 0x76 })
   const data = await sensor.read()
+  data.illuminance = cds.getValue()
   console.log(data);
   influx.writePoints([{
     measurement: MEASUREMENT,
@@ -33,31 +32,9 @@ const getSensorData = async () => {
       pressure: data.pressure,
       temperature: data.temperature,
       humidity: data.humidity,
-      illuminance: 0
+      illuminance: data.illuminance
     }
   }]);
 }
 
 setInterval(getSensorData, 5000);
-
-
-// bme280.open({ i2cAddress: 0x76 }).then(async sensor => {
-//   const data = await sensor.read()
-//   console.log(data);
-
-//   influx.writePoints([{
-//     measurement: MEASUREMENT,
-//     tags: { host: host },
-//     fields: {
-//       pressure: data.pressure,
-//       temperature: data.temperature,
-//       humidity: data.humidity,
-//       illuminance: 0
-//     }
-//   }]);
-
-// }).catch(err => {
-//   console.log(err);
-//   sensor.close();
-// });
-
