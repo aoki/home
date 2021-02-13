@@ -29,27 +29,27 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_INSTALL_PLUGINS=yesoreyeram-boomtheme-panel
 
-  telegraf:
-    image: telegraf:1.17.0
-    container_name: telegraf
-    restart: always
-    depends_on:
-      - influxdb
-    network_mode: "host"
-    ports:
-      - 8125:8125 # StatD
-      - 8092:8092 # UDP
-      - 8094:8094 #TCP
-    environment:
-      HOST_PROC: /rootfs/proc
-      HOST_SYS: /rootfs/sys
-      HOST_ETC: /rootfs/etc
-    volumes:
-      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /sys:/rootfs/sys:ro
-      - /proc:/rootfs/proc:ro
-      - /etc:/rootfs/etc:ro
+#  telegraf:
+#    image: sebd/telegraf-rpi
+#    container_name: telegraf
+#    restart: always
+#    depends_on:
+#      - influxdb
+#    network_mode: "host"
+#    ports:
+#      - 8125:8125 # StatD
+#      - 8092:8092 # UDP
+#      - 8094:8094 #TCP
+#    environment:
+#      HOST_PROC: /rootfs/proc
+#      HOST_SYS: /rootfs/sys
+#      HOST_ETC: /rootfs/etc
+#    volumes:
+#      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+#      - /var/run/docker.sock:/var/run/docker.sock:ro
+#      - /sys:/rootfs/sys:ro
+#      - /proc:/rootfs/proc:ro
+#      - /etc:/rootfs/etc:ro
 
   nginx:
     image: nginx:1.19.6
