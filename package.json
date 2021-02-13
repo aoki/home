@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "pm2 start remo.js --name remo && pm2 start raspberry-sensor.js --name sensor",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,15 +13,10 @@
     "@serialport/parser-readline": "^9.0.1",
     "bme280": "^2.1.0",
     "got": "^11.8.1",
-    "i2c": "^0.2.5",
-    "influx": "^5.6.3",
+    "influx": "^5.7.0",
     "ltsv": "^2.0.0",
-    "nature-remo": "^1.2.3",
-    "pm2": "^4.5.1",
-    "raspi": "^6.0.1",
-    "raspi-gpio": "^6.2.2",
-    "raspi-i2c": "^6.2.4",
+    "pm2": "^4.5.4",
     "rpio": "^2.4.2",
-    "serialport": "^9.0.4"
+    "serialport": "^9.0.6"
   }
 }
