@@ -34,3 +34,7 @@ home
 npx pm2 start remo.js --name remo
 npx pm2 start raspberry-sensor.js --name sensor
 ```
+
+## Sample
+
+![raspberrypi-sensors](./asetts/raspberrypi-sensors_bb.png)
