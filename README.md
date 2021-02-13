@@ -37,4 +37,4 @@ npx pm2 start raspberry-sensor.js --name sensor
 
 ## Sample
 
-![raspberrypi-sensors](./asetts/raspberrypi-sensors_bb.png)
+![raspberrypi-sensors](./assets/raspberrypi-sensors_bb.png)
