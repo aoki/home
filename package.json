@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "pm2 start remo.js --name remo && pm2 start raspberry-sensor.js --name sensor",
-    "fast": "npx fast --upload > fast && cat fast",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,6 +16,7 @@
     "got": "^11.8.1",
     "influx": "^5.7.0",
     "ltsv": "^2.0.0",
+    "node-cron": "^2.0.3",
     "pm2": "^4.5.4",
     "rpio": "^2.4.2",
     "serialport": "^9.0.6"
