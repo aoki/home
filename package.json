@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "pm2 start remo.js --name remo && pm2 start raspberry-sensor.js --name sensor",
+    "fast": "npx fast --upload > fast && cat fast",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,6 +13,7 @@
   "dependencies": {
     "@serialport/parser-readline": "^9.0.1",
     "bme280": "^2.1.0",
+    "fast-cli": "^2.4.0",
     "got": "^11.8.1",
     "influx": "^5.7.0",
     "ltsv": "^2.0.0",
