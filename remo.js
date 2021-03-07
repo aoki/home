@@ -5,7 +5,8 @@ const MEASUREMENT = 'nature_remo_e'
 const host = 'living.remo.aoki.dev'
 
 const influx = new Influx.InfluxDB({
-  host: 'localhost',
+//  host: 'localhost',
+  host: 'home.local',
   database: 'home',
   schema: [{
     measurement: MEASUREMENT,

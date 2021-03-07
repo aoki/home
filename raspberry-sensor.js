@@ -6,7 +6,8 @@ const host = 'living.raspberry.aoki.dev'
 const MEASUREMENT = 'sensors'
 
 const influx = new Influx.InfluxDB({
-  host: 'localhost',
+//  host: 'localhost',
+  host: 'home.local',
   database: 'home',
   schema: [{
     measurement: MEASUREMENT,
