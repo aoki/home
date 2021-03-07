@@ -18,7 +18,7 @@ services:
     restart: always
     ports:
       - 3000:3000
-    user: "472"
+    user: "$UID:$GID"
     volumes:
       - ./grafana/data:/var/lib/grafana
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
