@@ -9,5 +9,4 @@ copy:
 run:
 	npx pm2 start remo.js --name remo
 	npx pm2 start raspberry-sensor.js --name sensor
-	npx pm2 start fast.js --name fast
 .PHONY: run
