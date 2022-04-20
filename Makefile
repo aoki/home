@@ -7,5 +7,5 @@ copy:
 .PHONY: copy
 
 run:
-	npx pm2 start remo.js --name remo
+	npx pm2 start src/remo.js --name remo
 .PHONY: run

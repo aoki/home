@@ -6,7 +6,8 @@ const host = 'living.remo.aoki.dev'
 
 const influx = new Influx.InfluxDB({
 //  host: 'localhost',
-  host: 'home.local',
+//  host: 'home.local',
+  host: '192.168.10.130',
   database: 'home',
   schema: [{
     measurement: MEASUREMENT,
