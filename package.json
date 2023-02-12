@@ -13,7 +13,7 @@
     "@serialport/parser-readline": "^9.0.1",
     "bme280": "^2.1.0",
     "fast-cli": "^2.4.0",
-    "got": "^11.8.1",
+    "got": "^12.5.3",
     "influx": "^5.7.0",
     "ltsv": "^2.0.0",
     "node-cron": "^2.0.3",
